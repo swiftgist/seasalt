@@ -1,0 +1,103 @@
+#
+# spec file for package seasalt
+#
+# Copyright (c) 2019 SUSE LINUX GmbH, Nuernberg, Germany.
+#
+# All modifications and additions to the file contributed by third parties
+# remain the property of their copyright owners, unless otherwise agreed
+# upon. The license for this file, and modifications and additions to the
+# file, is the same license as for the pristine package itself (unless the
+# license for the pristine package is not an Open Source License, in which
+# case the license is the MIT License). An "Open Source License" is a
+# license that conforms to the Open Source Definition (Version 1.9)
+# published by the Open Source Initiative.
+
+# unify libexec for all targets
+%global _libexecdir %{_exec_prefix}/lib
+
+
+Name:           seasalt
+Version:        VERSION
+Release:        0
+Summary:        Salt files addressing Ceph orchestration prerequisites
+
+License:        GPL-3.0
+Group:          System/Libraries
+Url:            https://github.com/swiftgist/seasalt
+Source0:        %{name}-%{version}.tar.bz2
+
+BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildArch:      noarch
+
+%description
+A small collection of Salt files addressing the prerequisites for the Ceph orchestrator.
+
+%prep
+%setup
+
+%build
+
+%install
+make DESTDIR=%{buildroot} DOCDIR=%{_docdir} copy-files VERSION=%{version}
+# %__rm -f %{buildroot}/%{_mandir}/man?/*.gz
+# %__gzip %{buildroot}/%{_mandir}/man?/seasalt*
+
+%post
+# Restart salt-master if it's running, so it picks up
+# the config changes in /etc/salt/master.d/modules.conf
+systemctl try-restart salt-master > /dev/null 2>&1 || :
+systemctl try-restart salt-api > /dev/null 2>&1 || :
+
+%postun
+
+%files
+%defattr(-,root,root,-)
+%dir %attr(0755, salt, salt) /opt/seasalt/
+%dir %attr(0755, salt, salt) /opt/seasalt/salt/ceph/sshkey/files
+# %{_mandir}/man1/seasalt*.1.gz
+%config(noreplace) %attr(-, salt, salt) /etc/salt/master.d/*.conf
+/opt/seasalt/modules/modules/*.py
+%config(noreplace) /opt/seasalt/pillar/*.sls
+%config(noreplace) /opt/seasalt/pillar/ceph/*.sls
+%config(noreplace) /opt/seasalt/pillar/ceph/*.yml
+/opt/seasalt/salt/ceph/apparmor/*.sls
+/opt/seasalt/salt/ceph/apparmor/files/ceph.d/common
+/opt/seasalt/salt/ceph/apparmor/install/*.sls
+/opt/seasalt/salt/ceph/macros/README.md
+/opt/seasalt/salt/ceph/macros/*.sls
+/opt/seasalt/salt/ceph/sshkey/*.sls
+/opt/seasalt/salt/ceph/sshkey/copy/*.sls
+/opt/seasalt/salt/ceph/rescind/time/*.sls
+/opt/seasalt/salt/ceph/rescind/time/chrony/*.sls
+/opt/seasalt/salt/ceph/rescind/time/ntp/*.sls
+/opt/seasalt/salt/ceph/setup/*.sls
+/opt/seasalt/salt/ceph/setup/apparmor/*.sls
+/opt/seasalt/salt/ceph/setup/sshkey/*.sls
+/opt/seasalt/salt/ceph/setup/time/*.sls
+/opt/seasalt/salt/ceph/setup/tuned/*.sls
+/opt/seasalt/salt/ceph/time/README
+/opt/seasalt/salt/ceph/time/*.sls
+/opt/seasalt/salt/ceph/time/chrony/*.sls
+/opt/seasalt/salt/ceph/time/chrony/files/*.j2
+/opt/seasalt/salt/ceph/time/ntp/*.sls
+/opt/seasalt/salt/ceph/time/ntp/files/*.j2
+/opt/seasalt/salt/ceph/tuned/files/*.conf
+/opt/seasalt/salt/ceph/tuned/latency/*.sls
+/opt/seasalt/salt/ceph/tuned/off/*.sls
+/opt/seasalt/salt/ceph/tuned/throughput/*.sls
+
+%dir %attr(-, root, root) %{_docdir}/%{name}
+%{_docdir}/%{name}/*
+
+%package qa
+Summary:        Seasalt integration test scripts
+Group:          System/Libraries
+Requires:       jq
+Recommends:     seasalt
+
+%description qa
+The seasalt-qa subpackage contains all the scripts used in Seasalt
+
+%files qa
+/opt/seasalt/salt/ceph/tests
+%changelog
