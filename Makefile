@@ -28,6 +28,8 @@ copy-files:
 	# macros
 	install -D -m 644 salt/ceph/macros/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/macros
 	install -D -m 644 salt/ceph/macros/README.md -t $(DESTDIR)/opt/seasalt/salt/ceph/macros
+	# minion
+	install -D -m 644 salt/ceph/minion/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/minion
 	# sshkey
 	install -d m 755 $(DESTDIR)/opt/seasalt/salt/ceph/sshkey/files
 	install -D -m 644 salt/ceph/sshkey/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/sshkey
@@ -35,6 +37,7 @@ copy-files:
 	# setup
 	install -D -m 644 salt/ceph/setup/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup
 	install -D -m 644 salt/ceph/setup/apparmor/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/apparmor
+	install -D -m 644 salt/ceph/setup/minion/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/minion
 	install -D -m 644 salt/ceph/setup/sshkey/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/sshkey
 	install -D -m 644 salt/ceph/setup/time/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/time
 	install -D -m 644 salt/ceph/setup/tuned/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/tuned

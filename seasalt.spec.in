@@ -65,6 +65,7 @@ systemctl try-restart salt-api > /dev/null 2>&1 || :
 /opt/seasalt/salt/ceph/apparmor/install/*.sls
 /opt/seasalt/salt/ceph/macros/README.md
 /opt/seasalt/salt/ceph/macros/*.sls
+/opt/seasalt/salt/ceph/minion/*.sls
 /opt/seasalt/salt/ceph/sshkey/*.sls
 /opt/seasalt/salt/ceph/sshkey/copy/*.sls
 /opt/seasalt/salt/ceph/rescind/time/*.sls
@@ -72,6 +73,7 @@ systemctl try-restart salt-api > /dev/null 2>&1 || :
 /opt/seasalt/salt/ceph/rescind/time/ntp/*.sls
 /opt/seasalt/salt/ceph/setup/*.sls
 /opt/seasalt/salt/ceph/setup/apparmor/*.sls
+/opt/seasalt/salt/ceph/setup/minion/*.sls
 /opt/seasalt/salt/ceph/setup/sshkey/*.sls
 /opt/seasalt/salt/ceph/setup/time/*.sls
 /opt/seasalt/salt/ceph/setup/tuned/*.sls

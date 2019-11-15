@@ -1,0 +1,3 @@
+
+minion nop:
+  test.nop
