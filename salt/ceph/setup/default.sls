@@ -1,5 +1,6 @@
 
 include:
+  - .check
   - .apparmor
   - .minion
   - .sshkey

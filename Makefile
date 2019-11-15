@@ -21,10 +21,16 @@ copy-files:
 	install -D -m 644 pillar/*.sls -t $(DESTDIR)/opt/seasalt/pillar/
 	install -D -m 644 pillar/ceph/*.sls -t $(DESTDIR)/opt/seasalt/pillar/ceph
 	install -D -m 644 pillar/ceph/*.yml -t $(DESTDIR)/opt/seasalt/pillar/ceph
+	# states
+	install -D -m 644 salt/_states/*.py -t $(DESTDIR)/opt/seasalt/salt/_states
+	# modules
+	install -D -m 644 salt/_modules/*.py -t $(DESTDIR)/opt/seasalt/salt/_modules
 	# apparmor
 	install -D -m 644 salt/ceph/apparmor/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/apparmor
 	install -D -m 644 salt/ceph/apparmor/files/ceph.d/common -t $(DESTDIR)/opt/seasalt/salt/ceph/apparmor/files/ceph.d/
 	install -D -m 644 salt/ceph/apparmor/install/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/apparmor/install/
+	# check
+	install -D -m 644 salt/ceph/check/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/check
 	# macros
 	install -D -m 644 salt/ceph/macros/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/macros
 	install -D -m 644 salt/ceph/macros/README.md -t $(DESTDIR)/opt/seasalt/salt/ceph/macros
@@ -37,6 +43,7 @@ copy-files:
 	# setup
 	install -D -m 644 salt/ceph/setup/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup
 	install -D -m 644 salt/ceph/setup/apparmor/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/apparmor
+	install -D -m 644 salt/ceph/setup/check/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/check
 	install -D -m 644 salt/ceph/setup/minion/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/minion
 	install -D -m 644 salt/ceph/setup/sshkey/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/sshkey
 	install -D -m 644 salt/ceph/setup/time/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/setup/time

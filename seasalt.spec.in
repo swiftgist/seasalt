@@ -60,9 +60,12 @@ systemctl try-restart salt-api > /dev/null 2>&1 || :
 %config(noreplace) /opt/seasalt/pillar/*.sls
 %config(noreplace) /opt/seasalt/pillar/ceph/*.sls
 %config(noreplace) /opt/seasalt/pillar/ceph/*.yml
+/opt/seasalt/salt/_modules/*.py
+/opt/seasalt/salt/_states/*.py
 /opt/seasalt/salt/ceph/apparmor/*.sls
 /opt/seasalt/salt/ceph/apparmor/files/ceph.d/common
 /opt/seasalt/salt/ceph/apparmor/install/*.sls
+/opt/seasalt/salt/ceph/check/*.sls
 /opt/seasalt/salt/ceph/macros/README.md
 /opt/seasalt/salt/ceph/macros/*.sls
 /opt/seasalt/salt/ceph/minion/*.sls
@@ -73,6 +76,7 @@ systemctl try-restart salt-api > /dev/null 2>&1 || :
 /opt/seasalt/salt/ceph/rescind/time/ntp/*.sls
 /opt/seasalt/salt/ceph/setup/*.sls
 /opt/seasalt/salt/ceph/setup/apparmor/*.sls
+/opt/seasalt/salt/ceph/setup/check/*.sls
 /opt/seasalt/salt/ceph/setup/minion/*.sls
 /opt/seasalt/salt/ceph/setup/sshkey/*.sls
 /opt/seasalt/salt/ceph/setup/time/*.sls
