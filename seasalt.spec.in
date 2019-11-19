@@ -52,58 +52,17 @@ systemctl try-restart salt-api > /dev/null 2>&1 || :
 
 %files
 %defattr(-,root,root,-)
-%dir %attr(0755, salt, salt) /opt/seasalt/
 %dir %attr(0755, salt, salt) /opt/seasalt/salt/ceph/sshkey/files
 # %{_mandir}/man1/seasalt*.1.gz
+%dir /etc/salt
+%dir /etc/salt/master.d
 %config(noreplace) %attr(-, salt, salt) /etc/salt/master.d/*.conf
-/opt/seasalt/modules/modules/*.py
-%config(noreplace) /opt/seasalt/pillar/*.sls
-%config(noreplace) /opt/seasalt/pillar/ceph/*.sls
-%config(noreplace) /opt/seasalt/pillar/ceph/*.yml
-/opt/seasalt/salt/_modules/*.py
-/opt/seasalt/salt/_states/*.py
-/opt/seasalt/salt/ceph/apparmor/*.sls
-/opt/seasalt/salt/ceph/apparmor/files/ceph.d/common
-/opt/seasalt/salt/ceph/apparmor/install/*.sls
-/opt/seasalt/salt/ceph/check/*.sls
-/opt/seasalt/salt/ceph/macros/README.md
-/opt/seasalt/salt/ceph/macros/*.sls
-/opt/seasalt/salt/ceph/minion/*.sls
-/opt/seasalt/salt/ceph/sshkey/*.sls
-/opt/seasalt/salt/ceph/sshkey/copy/*.sls
-/opt/seasalt/salt/ceph/rescind/time/*.sls
-/opt/seasalt/salt/ceph/rescind/time/chrony/*.sls
-/opt/seasalt/salt/ceph/rescind/time/ntp/*.sls
-/opt/seasalt/salt/ceph/setup/*.sls
-/opt/seasalt/salt/ceph/setup/apparmor/*.sls
-/opt/seasalt/salt/ceph/setup/check/*.sls
-/opt/seasalt/salt/ceph/setup/minion/*.sls
-/opt/seasalt/salt/ceph/setup/sshkey/*.sls
-/opt/seasalt/salt/ceph/setup/time/*.sls
-/opt/seasalt/salt/ceph/setup/tuned/*.sls
-/opt/seasalt/salt/ceph/time/README
-/opt/seasalt/salt/ceph/time/*.sls
-/opt/seasalt/salt/ceph/time/chrony/*.sls
-/opt/seasalt/salt/ceph/time/chrony/files/*.j2
-/opt/seasalt/salt/ceph/time/ntp/*.sls
-/opt/seasalt/salt/ceph/time/ntp/files/*.j2
-/opt/seasalt/salt/ceph/tuned/files/*.conf
-/opt/seasalt/salt/ceph/tuned/latency/*.sls
-/opt/seasalt/salt/ceph/tuned/off/*.sls
-/opt/seasalt/salt/ceph/tuned/throughput/*.sls
+%dir /opt/seasalt/
+/opt/seasalt/modules
+/opt/seasalt/salt
+%config(noreplace) /opt/seasalt/pillar/
 
 %dir %attr(-, root, root) %{_docdir}/%{name}
 %{_docdir}/%{name}/*
 
-%package qa
-Summary:        Seasalt integration test scripts
-Group:          System/Libraries
-Requires:       jq
-Recommends:     seasalt
-
-%description qa
-The seasalt-qa subpackage contains all the scripts used in Seasalt
-
-%files qa
-/opt/seasalt/salt/ceph/tests
 %changelog
