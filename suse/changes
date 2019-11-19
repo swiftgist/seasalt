@@ -1,0 +1,19 @@
+-------------------------------------------------------------------
+Fri, 15 Nov 2019 14:58:29 -0500 Eric Jackson swiftgist@gmail.com
+
+  Version v0.2.0
+  Prevent warnings, nuisance error messages
+
+-------------------------------------------------------------------
+Fri, 15 Nov 2019 02:42:20 -0500 Eric Jackson swiftgist@gmail.com
+
+  Version v0.1.1
+  Upgrade packages on minions
+
+-------------------------------------------------------------------
+Mon, 11 Nov 2019 16:26:48 -0500 Eric Jackson swiftgist@gmail.com
+
+  Version v0.1.0
+  Initial orchestrations and states
+
+

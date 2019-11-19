@@ -1,0 +1,25 @@
+#!/bin/bash
+
+ROOT=$(dirname $(dirname $0))
+
+tag=`git describe`
+grep -q $tag $ROOT/CHANGELOG.md
+if [ $? -eq 1 ]
+then
+    cp $ROOT/CHANGELOG.md $ROOT/.changelog.md
+    (echo "### $tag"
+    git log --pretty="format:%aD %aN %ae%n%n" $tag^..$tag | sed -e 's!^HEAD.*:!!' -e 's!origin/master!!'
+    git tag -n9 $tag | cut -f9- -d\ 
+    echo ) | cat - $ROOT/.changelog.md > $ROOT/CHANGELOG.md
+    rm $ROOT/.changelog.md
+
+    cp $ROOT/suse/changes $ROOT/suse/.changes
+		(echo "-------------------------------------------------------------------"
+		git log --pretty="format:%aD %aN %ae%n%n" $tag^..$tag | sed -e 's!^HEAD.*:!!' -e 's!origin/master!!'
+		echo "  Version $tag"
+    git tag -n9 $tag | cut -f9- -d\ 
+		echo ) | cat - $ROOT/suse/.changes > $ROOT/suse/changes
+		rm $ROOT/suse/.changes
+fi
+
+
