@@ -66,7 +66,7 @@ copy-files:
 	# tests
 	install -D -m 644 salt/ceph/tests/os_switch/*.sls -t $(DESTDIR)/opt/seasalt/salt/ceph/tests/os_switch
 
-rpm: tarball
+rpm: changelog tarball
 	$(eval SPECDIR := $(shell rpm -E "%{_specdir}"))
 	mkdir -p $(SPECDIR)
 	sed "s/VERSION$$/"$(VERSION)"/" seasalt.spec.in > $(SPECDIR)/seasalt.spec
@@ -80,8 +80,5 @@ tarball:
 	tar -cjf $(SOURCEDIR)/seasalt-$(VERSION).tar.bz2 -C $(TEMPDIR) .
 	rm -r $(TEMPDIR)
 
-test: setup.py
-	tox -e py3
-
-lint: setup.py
-	tox -e lint
+changelog:
+	bin/changelog
